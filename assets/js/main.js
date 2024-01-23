@@ -1,5 +1,5 @@
 function convertPokemonTypesToLi(pokemonTypes) {
-    return pokemonTypes.map((type) => `<li class="type">${type}</li>`);
+    return pokemonTypes.map((type) => `<li class="type ${type}">${type}</li>`);
 }
 
 function convertPokemontToLi(pokemon) {

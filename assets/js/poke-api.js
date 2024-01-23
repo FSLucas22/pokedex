@@ -24,6 +24,6 @@ const pokeApi = {
             .then((response) => response.json())
             .then((jsonBody) => jsonBody.results)
             .then((pokemons) => pokemons.map(this.getPokemonDetail))
-            .then(Promise.all);
+            .then((pokemonsDetails) => Promise.all(pokemonsDetails));
     }
 }
