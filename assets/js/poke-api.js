@@ -1,4 +1,4 @@
-const API_URL = "https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}"
+const API_URL = "https://pokeapi.co/api/v2/pokemon"
 
 function convertPokeApiDetailToPokemon(detail) {
     const pokemon = new Pokemon();
