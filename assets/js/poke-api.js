@@ -3,7 +3,7 @@ const API_URL = "https://pokeapi.co/api/v2/pokemon"
 function convertPokeApiDetailToPokemon(detail) {
     const pokemon = new Pokemon();
     pokemon.name = detail.name;
-    pokemon.number = detail.order;
+    pokemon.number = detail.id;
     pokemon.types = detail.types.map((typeSlot) => typeSlot.type.name);
     const [type] = pokemon.types;
     pokemon.type = type;
