@@ -1,21 +1,3 @@
-class Pagination extends Subject {
-    offset;
-    limit;
-    
-    observerFunctions = [];
-
-    constructor(offset=0, limit=5) {
-        super();
-        this.offset = offset;
-        this.limit = limit;
-    }
-
-    nextPage() {
-        this.offset += this.limit;
-        this.notifyObservers();
-    }
-}
-
 function convertPokemonTypesToLi(pokemonTypes) {
     return pokemonTypes.map((type) => `<li class="type ${type}">${type}</li>`);
 }
@@ -51,11 +33,22 @@ loadPokemonItens = (pokemonOl) => (offset, limit) => {
     const pokemonsOl = document.getElementById('pokemonList');
     const loadMoreButton = document.getElementById('loadMoreButton');
     const loadItens = loadPokemonItens(pokemonsOl)
-    const pagination = new Pagination(0, 10);
+    let offset = 0;
+    const limit = 5;
+    const maxRecords = 15;
 
-    pagination.registerObserverFunction(loadItens);
+    loadItens(offset, limit);
 
-    loadItens(pagination.offset, pagination.limit);
-
-    loadMoreButton.addEventListener('click', () => pagination.nextPage())
+    loadMoreButton.addEventListener('click', () => {
+        offset += limit;
+        const qtdRecordsNextPage = offset + limit;
+        
+        if (qtdRecordsNextPage >= maxRecords) {
+            const newLimit = maxRecords - offset;
+            loadItens(offset, newLimit);
+            loadMoreButton.parentElement.removeChild(loadMoreButton);
+            return;
+        }
+        loadItens(offset, limit);
+    })
 })();
